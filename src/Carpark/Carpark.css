@@ -1,0 +1,88 @@
+section {
+    background:rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 5px;
+    border: 1px solid rgba(0,0,0,1);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    box-shadow: 0px 0px 100px 50px rgba(0,0,0,0.75);
+}
+
+section > .carpark {
+    margin: 5px;
+    border: 1px dashed black;
+    display: inline-block;
+    flex-grow: 1;
+    width: 20%;
+    min-width: 200px;
+    min-height: 200px;
+    background: rgb(149, 149, 149);
+    border-radius: 10px;
+    color: white;
+}
+
+section > .carpark > .stats {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+section > .carpark > .stats > * {
+    width: 100%;
+
+    border-radius: 5px;
+    border: 1px solid black;
+    margin: 5px;
+    padding: 5px;
+    background: #ddbdd5;
+    display: inline-block;
+    text-align: center;
+    color: black;
+}
+
+section > .carpark > .stats > * > span {
+    background: #222222;
+    padding: 5px;
+    display: inline-block;
+    float: right;
+    width: 25%;
+    text-align: center;
+    border-radius: 10px 0 10px 0;
+    color: white;
+}
+
+section > .carpark > h1 {
+    margin: 0;
+    padding: 10px;
+    padding-bottom: 0;
+    text-align: center;
+}
+
+section > .carpark > h2 {
+    margin: 0;
+    padding: 5px;
+    padding-top: 0;
+    text-align: center;
+}
+
+section > .carpark > .stats > .occupancy {
+            
+};
+
+section > .carpark > .stats > .spacesTaken {
+
+};
+section > .carpark > .stats > .capacity {
+
+};
+
+section > .carpark > .stats > .available {
+
+};
+
+section > .carpark > .stats > .filledPerc {
+
+};
