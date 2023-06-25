@@ -112,3 +112,7 @@
     text-align: center;
     
 }
+
+.parkManager > .carpark > h1 > span:hover {
+    background: color-mix(in srgb, var(--color-front-bg) 90%, white);
+}
