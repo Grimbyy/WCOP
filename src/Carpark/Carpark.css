@@ -1,88 +1,114 @@
-section {
-    background:rgba(0, 0, 0, 0.1);
+.parkManager {
+    background: var(--color-background);
     padding: 20px;
-    margin: 5px;
-    border: 1px solid rgba(0,0,0,1);
+    margin: 0;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
     align-items: center;
-    box-shadow: 0px 0px 100px 50px rgba(0,0,0,0.75);
+    overflow-y: auto;
 }
 
-section > .carpark {
+.parkManager > .carpark {
     margin: 5px;
-    border: 1px dashed black;
     display: inline-block;
     flex-grow: 1;
     width: 20%;
     min-width: 200px;
-    min-height: 200px;
-    background: rgb(149, 149, 149);
-    border-radius: 10px;
+    background: var(--color-background-light);
     color: white;
 }
 
-section > .carpark > .stats {
+.parkManager > .carpark > .stats {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
     align-items: center;
+    gap: 10px;
+    padding: 15px 10px;
 }
 
-section > .carpark > .stats > * {
-    width: 100%;
-
-    border-radius: 5px;
-    border: 1px solid black;
-    margin: 5px;
-    padding: 5px;
-    background: #ddbdd5;
-    display: inline-block;
-    text-align: center;
-    color: black;
+.parkManager > .carpark > .stats > .large-stat{
+    flex: 0 0 90%;
+    padding: 10px;
+    background: var(--color-front-bg);
 }
 
-section > .carpark > .stats > * > span {
-    background: #222222;
-    padding: 5px;
+.parkManager > .carpark > .stats > .large-stat.loader-stat{
+    background: var(--color-loader-grey);
+    position: relative;
+    padding: 20px 10px;
+}
+
+.parkManager > .carpark > .stats > .large-stat.loader-stat::after{
+    content: attr(data-target);
     display: inline-block;
-    float: right;
-    width: 25%;
-    text-align: center;
-    border-radius: 10px 0 10px 0;
+    position:absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: calc(100% *  var(--preferred-width));
+    background: var(--preferred-colour);
     color: white;
+    
+    
+    display: flex;
+    flex-wrap: nowrap;
+    text-align: right;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    text-align: center;
 }
 
-section > .carpark > h1 {
+.parkManager > .carpark > .stats > .small-stat {
+    padding: 0;
+    padding-top: 5px;
+    text-align: center;
+    background: var(--color-front-bg);
+    padding: 5px;
+    padding-bottom: 0;
+    flex: 0 0 26%;
+}
+
+.parkManager > .carpark > .stats > .small-stat > span {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    background: var(--color-front-fg);
+    padding: 15px 5px;
+    margin-left: -5px;
+    margin-top: 5px;
+}
+
+.parkManager > .carpark > h1 {
     margin: 0;
     padding: 10px;
-    padding-bottom: 0;
-    text-align: center;
+    background: var(--color-front-bg);
+    display: flex;
+    align-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: space-between;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    max-height: 3em;
+    line-height: 1em;
+
+    position: relative;
 }
 
-section > .carpark > h2 {
-    margin: 0;
-    padding: 5px;
-    padding-top: 0;
+.parkManager > .carpark > h1 > span {
+    display: inline-block;
+    cursor:pointer;
+    padding: 10px;
+    border-radius: 5px 0 0 5px;
+    margin-right: -10px;
+    top: 25%;
+    background: var(--color-front-fg);
     text-align: center;
+    
 }
-
-section > .carpark > .stats > .occupancy {
-            
-};
-
-section > .carpark > .stats > .spacesTaken {
-
-};
-section > .carpark > .stats > .capacity {
-
-};
-
-section > .carpark > .stats > .available {
-
-};
-
-section > .carpark > .stats > .filledPerc {
-
-};

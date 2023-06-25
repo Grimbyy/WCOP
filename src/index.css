@@ -1,5 +1,11 @@
 :root {
     font-family: 'Roboto';
+    --color-front-bg: #575982;
+    --color-front-fg: #A19FFF;
+    --color-background: #40415C;
+    --color-background-light: #D9D9D9;
+    --color-background-embed: #8789B8;
+    --color-loader-grey: #A3A3A3;
 }
 
 html, body  {

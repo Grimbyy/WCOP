@@ -1,3 +1,69 @@
 #root {
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+}
 
+header {
+    background: var(--color-front-bg);
+    color: white;
+    min-height: 50px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    justify-content: space-between;
+
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+header > h1 {
+    padding: 0;
+    padding-left: 10px;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(8, auto);
+    align-items: center;
+    justify-content: center;
+}
+
+header > h1 > span {
+    color: var(--color-front-fg);
+    padding-left: 10px;
+}
+
+header > h1 > span:first-child {
+    padding-left: 0;
+}
+
+header > section {
+    display: inline-block;
+    background: blue;
+    width: 50px;
+}
+
+.destinations {
+    border-top: 3px solid var(--color-front-fg);
+    background: var(--color-front-bg);
+    margin: 0;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.destinations > span {
+    flex-grow: 1;
+    text-align: center;
+    padding: 10px;
+    color: white;
+    cursor: pointer;
+}
+
+.destinations > span:hover:not(.current) {
+    background: color-mix(in srgb, var(--color-front-bg) 90%, white);
+}
+
+.destinations > span.current {
+    border-bottom: 3px solid var(--color-front-fg);
 }
