@@ -35,7 +35,7 @@ export default function Manager({locations, centre}) {
         const X_4 = closed1 - closed2;
         if (!!X_4) return X_4;
 
-        return ((X_1*0.6) + (X_2*0.1) + (X_3*0.2))
+        return ((X_1*0.6) + (X_2*0.3) + (X_3*0.1))
     }
 
     function distance(loc1,loc2) {
