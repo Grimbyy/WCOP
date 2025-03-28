@@ -37,7 +37,7 @@ function makeCarParkObj(element) {
 }
 
 export default async function getXML(subscription) {
-    const response = await fetch('https://corsproxy.io/?https://datex.norfolk.cdmf.info/carparks/content.xml');
+    const response = await fetch('https://proxy.cgrimble.com/proxy?target=https://datex.norfolk.cdmf.info/carparks/content.xml');
     const text = await response.text();
     const doc = new DOMParser().parseFromString(text, 'text/xml');
     const formatted = parseDoc(doc);
