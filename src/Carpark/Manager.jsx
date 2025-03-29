@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react'
+/* eslint-disable react/prop-types */
+import { useEffect, useState } from 'react'
 
 import Carpark from '.';
 
@@ -27,35 +28,55 @@ export default function Manager({locations, centre}) {
     const [parks, setParks] = useState(null);
 
     function byRelevance(loc1, loc2) {
-        const X_1 = distance(loc1, loc2);
-        const X_2 = fullness(loc1, loc2);
-        const X_3 = spacesAvailable(loc1, loc2);
+        const X_1 = loc1.__manager_data.distance;
+        const X_2 = loc1.__manager_data.fullness;
+        const X_3 = loc1.__manager_data.available;
+        const Y_1 = loc2.__manager_data.distance;
+        const Y_2 = loc2.__manager_data.fullness;
+        const Y_3 = loc2.__manager_data.available;
         const closed1 = loc1.status === 'carParkClosed' ? Infinity : 0;
         const closed2 = loc2.status === 'carParkClosed' ? Infinity : 0;
-        const X_4 = closed1 - closed2;
-        if (!!X_4) return X_4;
+        const X_4 = closed1;
+        const Y_4 = closed2;
 
-        return ((X_1*0.6) + (X_2*0.3) + (X_3*0.1))
+        // Closed goes right to the bottom
+        if (X_4 > Y_4) {
+            return 1;
+        } else if (X_4 < Y_4) {
+            return -1;
+        }
+        // Care more about distance, haggle over fullness, number of free spaces is an afterthought
+        return (
+            (X_1 - Y_1)*(7/3)
+            + (X_2 - Y_2)*0.1
+            + (Y_3 - X_3)*0.05
+        )
     }
 
-    function distance(loc1,loc2) {
-        const distance1 = getDistance(centre, loc1.location);
-        loc1.distance = distance1;
-        const distance2 = getDistance(centre, loc2.location);
-        loc2.distance = distance2;
-        return distance1 - distance2;
+    function relevanceStats(loc) {
+        const distance = getDistance(centre, loc.location);
+        loc.distance = distance;
+        const fullness = loc.spacesTaken/loc.capacity;
+        const available = loc.capacity-loc.spacesTaken;
+
+        return { ...loc, __manager_data: { distance, fullness, available }};
     }
 
-    function fullness(loc1,loc2) {
-        const fullness1 = loc1.spacesTaken/loc1.capacity;
-        const fullness2 = loc2.spacesTaken/loc2.capacity;
-        return fullness1 - fullness2;
-    }
-
-    function spacesAvailable(loc1,loc2) {
-        const available1 = loc1.capacity-loc1.spacesTaken;
-        const available2 = loc2.capacity-loc2.spacesTaken;
-        return available2 - available1;
+    function normaliseStats(arr) {
+        const distances = arr.map((park) => park.__manager_data.distance).sort((a, b) => a-b);
+        const availability = arr.map((park) => park.__manager_data.available).sort((a, b) => a-b);
+        const minDist = distances[0];
+        const maxDist = distances[distances.length-1];
+        const minAvailable = availability[0];
+        const maxAvailable = availability[availability.length-1];
+        return arr.map((park) => ({
+            ...park,
+            __manager_data: {
+                distance: (park.__manager_data.distance - minDist) / maxDist,
+                fullness: park.__manager_data.fullness,
+                available: (park.__manager_data.available - minAvailable) / maxAvailable
+            }
+        }));
     }
 
     useEffect(() => {
@@ -68,7 +89,7 @@ export default function Manager({locations, centre}) {
   return (
     <section className='parkManager'>
     {
-        parks.sort(byRelevance).map((park, i) => <Carpark key={i} location={park} centre={centre}/>)
+        normaliseStats(parks.map(relevanceStats)).sort(byRelevance).map((park, i) => <Carpark key={i} location={park} centre={centre}/>)
     }
     </section>
   )
